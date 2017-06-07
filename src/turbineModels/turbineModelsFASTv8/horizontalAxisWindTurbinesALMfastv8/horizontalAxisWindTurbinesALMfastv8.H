@@ -65,7 +65,7 @@ SourceFiles
 #include "OFstream.H"
 #include "fvCFD.H"
 #include "Random.H"
-#include "FAST_cInterface.h"
+#include "OpenFAST.H"
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
@@ -138,8 +138,8 @@ private:
         volVectorField Urel;
 
         //- Declare an instance of the class that interfaces with FAST.
-      //FAST_cInterface FAST;
-        autoPtr<FAST_cInterface> FAST;
+        fast::fastInputs fi ;
+        autoPtr<fast::OpenFAST> FAST;
 
         //- Write every "outputInterval" time steps or seconds.  Options are
         //  "timeStep" or "runTime".  "runTime" writes out as closely to every
@@ -456,7 +456,7 @@ private:
             DynamicList<List<List<scalar> > > bladePointChord;
             
             //- Blade point orientation.
-            DynamicList<List<List<vector> > > bladePointOrientation;
+            DynamicList<List<List<tensor> > > bladePointOrientation;
 
             //- Tower height from ground.
             DynamicList<List<scalar> > towerPointHeight;
@@ -466,7 +466,7 @@ private:
             DynamicList<List<scalar> > towerPointChord;
 
             //- Tower points orientation.
-            DynamicList<List<vector> > towerPointOrientation;
+            DynamicList<List<tensor> > towerPointOrientation;
 
             //- Unit vector pointing along the rotor shaft (axis of blade rotation).
             DynamicList<vector> mainShaftOrientation;
@@ -770,28 +770,28 @@ private:
 
 public:
     
-    //- Constructor
-    horizontalAxisWindTurbinesALMfastv8
-    (
-        const volVectorField& U
-    );
+  //- Constructor
+  horizontalAxisWindTurbinesALMfastv8
+  (
+   const volVectorField& U
+   );
+  
     
-    
-    //- Destructor
-    virtual ~horizontalAxisWindTurbinesALMfastv8()
-    {
-      //delete FAST;
-    }
-    
-    
-    // Public Member Functions
+  //- Destructor
+  virtual ~horizontalAxisWindTurbinesALMfastv8() {
 
-        //- Update state of turbine.
-        void update();
+  };
+    
+    
+  // Public Member Functions
 
-        //- Return force.
-        volVectorField& force();
-        
+  //- Update state of turbine.
+  void update();
+
+  //- Return force.
+  volVectorField& force();
+
+  void end();
 };
 
 

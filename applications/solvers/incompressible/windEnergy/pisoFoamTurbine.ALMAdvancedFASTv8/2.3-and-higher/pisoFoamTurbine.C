@@ -62,6 +62,9 @@ int main(int argc, char *argv[])
         #include "CourantNo.H"
         #include "updateDivSchemeBlendingField.H"
 
+        // Update the turbine.
+        turbines.update();
+
         // PISO algorithm
         {
             // Momentum predictor
@@ -140,9 +143,6 @@ int main(int argc, char *argv[])
 
         // Compute the turbulence model variables.
         turbulence->correct();
-
-        // Update the turbine.
-        turbines.update();
 
         // Compute the mean fields.
         #include "computeMeanFields.H"

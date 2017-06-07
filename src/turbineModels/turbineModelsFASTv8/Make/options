@@ -1,3 +1,6 @@
+sinclude $(GENERAL_RULES)/mplib$(WM_MPLIB)
+sinclude $(RULES)/mplib$(WM_MPLIB)
+
 EXE_INC = \
     -I$(LIB_SRC)/triSurface/lnInclude \
     -I$(LIB_SRC)/finiteVolume/lnInclude \
@@ -6,7 +9,9 @@ EXE_INC = \
     -I$(LIB_SRC)/turbulenceModels/LES/LESdeltas/lnInclude \
     -I$(LIB_SRC)/turbulenceModels/LES/LESfilters/lnInclude \
     -I$(LIB_SRC)/transportModels \
-    -I$(FAST_DIR)/include
+    $(PFLAGS) \
+    $(PINC) \
+    -I$(OPENFAST_DIR)/include
 
 LIB_LIBS = \
     -ltriSurface \
@@ -15,6 +20,30 @@ LIB_LIBS = \
     -lincompressibleTurbulenceModel \
     -lLESdeltas \
     -lLESfilters \
-    -L$(FAST_DIR)/lib \
-    -lFAST_glin64_release \
-    -lFAST_cInterface_glin64_release
+    -L$(OPENFAST_DIR)/lib \
+    -laerodyn14lib \
+    -laerodynlib \
+    -lbeamdynlib \
+    -lelastodynlib \
+    -lextptfm_mckflib \
+    -lfeamlib \
+    -lfoamfastlib \
+    -lhydrodynlib \
+    -licedynlib \
+    -licefloelib \
+    -lifwlib \
+    -lmapcpplib \
+    -lmaplib \
+    -lmoordynlib \
+    -lnwtclibs \
+    -lopenfastcpplib \
+    -lopenfastlib \
+    -lopenfast_postlib \
+    -lopenfast_prelib \
+    -lopenfoamtypeslib \
+    -lorcaflexlib \
+    -lscfastlib \
+    -lsctypeslib \
+    -lservodynlib \
+    -lsubdynlib 
+
